@@ -1,0 +1,14 @@
+# Global Configuration for FinPulse
+aws:
+  region: "us-east-1"
+  kinesis_stream_name: "FinPulse-Transaction-Stream"
+  dynamodb_table: "FinPulse-Alerts"
+
+generator:
+  workers: 50
+  batch_size: 1000
+  throughput_limit: 1000000 # events per second
+
+processor:
+  checkpoint_interval: 5000
+  parallelism: 4

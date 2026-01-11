@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:DescribeStream",
+                "kinesis:PutRecord",
+                "kinesis:PutRecords"
+            ],
+            "Resource": "arn:aws:kinesis:*:*:stream/FinPulse-Transaction-Stream"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cloudwatch:PutMetricData",
+            "Resource": "*"
+        }
+    ]
+}

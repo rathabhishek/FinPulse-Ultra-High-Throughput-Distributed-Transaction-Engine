@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'FinPulse Ingestion Layer - High Throughput Kinesis Stream'
+
+Resources:
+  FinPulseStream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      Name: FinPulse-Transaction-Stream
+      [cite_start]ShardCount: 5 # Demonstrates capacity planning for high-load [cite: 5, 29]
+      RetentionPeriodHours: 24
+      StreamEncryption:
+        EncryptionType: KMS
+        KeyId: alias/aws/kinesis
+
+  [cite_start]StreamReaderPolicy: # Reflects your "25% improvement in data security" [cite: 32]
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: FinPulseReaderPolicy
+      Roles:
+        - !Ref GeneratorExecutionRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - kinesis:PutRecord
+              - kinesis:PutRecords
+            Resource: !GetAtt FinPulseStream.Arn

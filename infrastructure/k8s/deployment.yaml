@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finpulse-generator
+  labels:
+    app: finpulse
+spec:
+  [cite_start]replicas: 3 # Proves scalability skills 
+  selector:
+    matchLabels:
+      app: finpulse
+  template:
+    metadata:
+      labels:
+        app: finpulse
+    spec:
+      containers:
+      - name: generator
+        image: your-repo/finpulse-engine:latest
+        [cite_start]resources: # Demonstrates resource optimization [cite: 5]
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"

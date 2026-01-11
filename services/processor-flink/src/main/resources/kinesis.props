@@ -1,0 +1,5 @@
+# Kinesis Consumer Configs
+aws.region = us-east-1
+aws.credentials.provider = AUTO
+flink.stream.initpos = LATEST
+flink.shard.discovery.intervalmillis = 10000
